@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-#    paths:
-#      - "object_watchdog.__init__.py"
+    paths:
+      - "object_watchdog.__init__.py"
 
 jobs:
   deploy:

@@ -3,6 +3,11 @@ Object Watchdog
 
 This library allow to monitor changes in a Python object and, when some attribute changes, then launch callbacks.
 
+Support this project
+====================
+
+Support this project (to solve issues, new features...) by applying the Github "Sponsor" button.
+
 Install
 =======
 

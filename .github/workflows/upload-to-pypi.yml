@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "README"
+      - "VERSION"
 
 jobs:
   deploy:

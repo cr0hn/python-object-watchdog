@@ -10,13 +10,15 @@ def new__setattr__(self, class_name, key, value):
 
     if self.__instance__ and not key.startswith("_"):
         for coro in self.__async_callbacks__:
-            asyncio.create_task(coro(self, class_name, key, value))
+            asyncio.create_task(
+                coro(self.__instance_object__, class_name, key, value)
+            )
 
         for fn in self.__callbacks__:
-            fn(self, class_name, key, value)
+            fn(self.__instance_object__, class_name, key, value)
 
         for f in self.__cache_callbacks__:
-            getattr(self, f)(self, key)
+            getattr(self.__instance_object__, f)(self, key)
 
 
 class ObjectWatchdog(type):
@@ -30,6 +32,7 @@ class ObjectWatchdog(type):
 
         # Meta info
         o.__instance__ = False
+        o.__instance_object__ = None
 
         # Add methods
         o.add_callback = lambda self, x: self.__callbacks__.append(x)
@@ -55,6 +58,7 @@ class ObjectWatchdog(type):
         o.__cache_callbacks__.extend(ObjectWatchdog.__cache_callbacks__.copy())
 
         o.__instance__ = True
+        o.__instance_object__ = o
 
         return o
 

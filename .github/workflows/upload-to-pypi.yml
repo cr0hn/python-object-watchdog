@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "object_watchdog.__init__.py"
+      - "README"
 
 jobs:
   deploy:
